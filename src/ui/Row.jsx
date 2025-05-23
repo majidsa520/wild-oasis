@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
 
 const directions = {
-	hor: css`
+	horizontal: css`
 		justify-content: space-between;
 	`,
-	ver: css`
+	vertical: css`
 		flex-direction: column;
 		gap: 2rem;
 	`,
@@ -15,5 +15,5 @@ const Row = styled.div`
 
 	${(props) => directions[props.dir]}
 `;
-Row.defaultProps = { dir: "hor" };
+Row.defaultProps = { type: "horizontal" };
 export default Row;

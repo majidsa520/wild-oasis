@@ -1,13 +1,5 @@
 import styled, { css } from "styled-components";
 
-const Button = styled.button`
-	background-color: var(--color-brand-600);
-	border-radius: var(--border-radius-sm);
-	color: var(--color-brand-50);
-	border: none;
-	padding: 1rem;
-`;
-
 const sizes = {
 	small: css`
 		font-size: 1.2rem;
@@ -49,10 +41,20 @@ const variations = {
 	danger: css`
 		color: var(--color-red-100);
 		background-color: var(--color-red-700);
-
+		border: 1px solid var(--color-red-700);
 		&:hover {
 			background-color: var(--color-red-800);
 		}
 	`,
 };
+
+const Button = styled.button`
+	border-radius: var(--border-radius-sm);
+	padding: 1rem;
+	border: 1px solid var(--color-brand-600);
+	${(props) => variations[props.variation]}
+	${(props) => sizes[props.size]}
+`;
+Button.defaultProps = { variation: "primary", size: "medium" };
+
 export default Button;

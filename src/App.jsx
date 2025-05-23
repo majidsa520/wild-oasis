@@ -3,8 +3,8 @@ import GlobalStyles from "./styles/GlobalStyles";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 import Heading from "./ui/Heading";
+import Row from "./ui/Row";
 
-const H1 = styled.h1``;
 const StyledApp = styled.main`
 	padding: 20px;
 `;
@@ -13,11 +13,22 @@ function App() {
 		<>
 			<GlobalStyles />
 			<StyledApp>
-				<H1>The Wild Oasis</H1>
-				<Button>Check In</Button>
-				<Button>Check Out</Button>
-				<Input placeholder="CheckIn" />
-				<Heading as="h4">this is heading!</Heading>
+				<Row dir="ver">
+					<Row>
+						<Heading>The Wild Oasis</Heading>
+						<div>
+							<Button>Check In</Button>
+							<Button variation="secondary">Check Out</Button>
+						</div>
+					</Row>
+					<Row dir="ver">
+						<Heading as="h4">Form</Heading>
+						<div>
+							<Input placeholder="CheckIn" />
+							<Input placeholder="CheckOut" />
+						</div>
+					</Row>
+				</Row>
 			</StyledApp>
 		</>
 	);

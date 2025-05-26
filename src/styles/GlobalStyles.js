@@ -95,6 +95,18 @@ body {
   line-height: 1.5;
   font-size: 1.6rem;
 }
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
 
 input,
 button,

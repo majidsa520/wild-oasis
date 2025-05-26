@@ -13,7 +13,7 @@ const directions = {
 const Row = styled.div`
 	display: flex;
 
-	${(props) => directions[props.dir]}
+	${(props) => directions[props.type]}
 `;
 Row.defaultProps = { type: "horizontal" };
 export default Row;

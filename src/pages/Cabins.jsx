@@ -1,21 +1,23 @@
 import { useEffect } from "react";
+
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
-import { getCabins } from "../services/apiCabins";
+
+import CabinTable from "../features/cabins/CabinTable";
+import CabinRow from "../features/cabins/CabinRow";
 
 function Cabins() {
 	useEffect(() => {
 		//const cabins = await getCabins()
 		//console.log(cabins);
 	}, []);
+
 	return (
-		<Row type="horizontal">
+		<Row type="vertical">
 			<Heading as="h1">All cabins</Heading>
-			<p>TEST</p>
-			<img
-				src="https://ohxvrgskowfwbbgwjlvo.supabase.co/storage/v1/object/public/cabin-images//cabin-001.jpg"
-				alt="cabin in the woods photo"
-			/>
+			<CabinTable>
+				<CabinRow></CabinRow>
+			</CabinTable>
 		</Row>
 	);
 }

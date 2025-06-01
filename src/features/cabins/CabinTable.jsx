@@ -28,14 +28,11 @@ const TableHeader = styled.tr`
 `;
 
 function CabinTable() {
-	const {
-		data: cabins,
-		isLoading,
-		error,
-	} = useQuery({
-		queryKey: ["cabin"],
+	const { data: cabins, isLoading } = useQuery({
+		queryKey: ["cabins"],
 		queryFn: getCabins,
 	});
+
 	if (isLoading) return <Spinner />;
 	return (
 		<Table role="table">

@@ -12,6 +12,7 @@ const directions = {
 
 const Row = styled.div`
 	display: flex;
+	margin-bottom: 24px;
 
 	${(props) => directions[props.type]}
 `;

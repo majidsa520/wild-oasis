@@ -12,16 +12,14 @@ import Settings from "./pages/Settings";
 import Users from "./pages/Users";
 import AppLayout from "./ui/AppLayout";
 import { Toaster } from "react-hot-toast";
-
-function App() {
-	const queryClient = new QueryClient({
-		defaultOptions: {
-			queries: {
-				staleTime: 0,
-			},
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			staleTime: 0,
 		},
-	});
-
+	},
+});
+function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<ReactQueryDevtools initialIsOpen="false" />

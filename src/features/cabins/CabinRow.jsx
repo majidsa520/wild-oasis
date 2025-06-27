@@ -4,6 +4,8 @@ import Button from "../../ui/Button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import CreateCabinForm from "./CreateCabinForm";
 
 const TableRow = styled.tr`
 	display: grid;
@@ -53,6 +55,7 @@ const Discount = styled.td`
 `;
 
 function CabinRow({ cabin }) {
+	const [showForm, setShowForm] = useState();
 	const queryClient = useQueryClient();
 	const {
 		name,
@@ -71,25 +74,41 @@ function CabinRow({ cabin }) {
 		onError: () => toast.error("Cabin could not be deleted"),
 	});
 	return (
-		<TableRow>
-			<td>
-				<Img src={image} />
-			</td>
-			<Cabin>{name}</Cabin>
-			<Capacity>{maxCapacity}</Capacity>
-			<Price>{regularPrice}</Price>
-			<Discount>{discount}</Discount>
-			<td>
-				<Button
-					variation="secondary"
-					size="small"
-					onClick={() => removeCabin(cabinId)}
-					disabled={isDeleting}
-				>
-					delete
-				</Button>
-			</td>
-		</TableRow>
+		<>
+			<TableRow>
+				<td>
+					<Img src={image} />
+				</td>
+				<Cabin>{name}</Cabin>
+				<Capacity>{maxCapacity}</Capacity>
+				<Price>{regularPrice}</Price>
+				<Discount>{discount}</Discount>
+				<td>
+					<Button
+						variation="secondary"
+						size="small"
+						onClick={() => setShowForm(() => !showForm)}
+					>
+						edit
+					</Button>
+					<Button
+						variation="secondary"
+						size="small"
+						onClick={() => removeCabin(cabinId)}
+						disabled={isDeleting}
+					>
+						delete
+					</Button>
+				</td>
+			</TableRow>
+			{showForm && (
+				<tr>
+					<td>
+						<CreateCabinForm cabinToEdit={cabin} />
+					</td>
+				</tr>
+			)}
+		</>
 	);
 }
 

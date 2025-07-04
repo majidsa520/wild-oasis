@@ -3,8 +3,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import styled from "styled-components";
-
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
@@ -12,59 +10,55 @@ import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import { createCabin } from "../../services/apiCabins";
 import FormRow from "../../ui/FormRow";
+import { useCreateCabin } from "./useCreateCabin";
+import { useEditCabin } from "./useEditCabin";
 
 function CreateCabinForm({ cabinToEdit = {} }) {
-	const queryClient = useQueryClient();
 	const { id: editId, ...editValues } = cabinToEdit;
 	const isEditingSession = Boolean(editId);
+	const { createNewCabin, isCreating } = useCreateCabin();
+	const { editCabin, isEditing } = useEditCabin();
 
-	const { mutate: createNewCabin, isLoading: isCreating } = useMutation({
-		mutationFn: createCabin,
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["cabins"] });
-			toast.success("New cabin has successfully added");
-			reset();
-		},
-		onError: () => {
-			toast.error("Something went wrong");
-		},
-	});
-	const { mutate: editCabin, isLoading: isEditing } = useMutation({
-		mutationFn: ({ newCabinData, id }) => {
-			createCabin(newCabinData, id);
-		},
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["cabins"] });
-			toast.success("The cabin was successfully edited.");
-			reset();
-		},
-		onError: () => {
-			toast.error("Something went wrong");
-		},
-	});
-
-	const { register, handleSubmit, getValues, formState, reset } = useForm({
+	const {
+		register,
+		handleSubmit,
+		getValues,
+		formState,
+		reset: resetForm,
+	} = useForm({
 		defaultValues: isEditingSession ? editValues : {},
 	});
 	const { errors } = formState;
 	function onSubmit(data) {
 		const image = typeof data.image === "string" ? data.image : data.image[0];
 		if (isEditingSession) {
-			editCabin({
-				newCabinData: { ...data, image: image },
-				id: editId,
-			});
-			reset();
+			editCabin(
+				{
+					newCabinData: { ...data, image: image },
+					id: editId,
+				},
+				{
+					onSuccess: (data) => {
+						resetForm();
+					},
+				}
+			);
 		} else {
-			createNewCabin({ ...data, image: image });
-			reset();
+			createNewCabin(
+				{ ...data, image: image },
+				{
+					onSuccess: (data) => {
+						console.log(data);
+						resetForm();
+					},
+				}
+			);
 		}
 	}
 	function onError(error) {
 		//form errors here...
 	}
 	const isPending = isCreating || isEditing;
-	console.log(getValues());
 	return (
 		<Form onSubmit={handleSubmit(onSubmit, onError)}>
 			<FormRow label="Cabin Name" error={errors?.name?.message}>

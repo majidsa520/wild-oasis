@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
 import Button from "../../ui/Button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteCabin } from "../../services/apiCabins";
-import toast from "react-hot-toast";
 import { useState } from "react";
 import CreateCabinForm from "./CreateCabinForm";
+import { useDeleteCabin } from "./useDeleteCabin";
 
 const TableRow = styled.tr`
 	display: grid;
@@ -56,7 +54,6 @@ const Discount = styled.td`
 
 function CabinRow({ cabin }) {
 	const [showForm, setShowForm] = useState();
-	const queryClient = useQueryClient();
 	const {
 		name,
 		discount,
@@ -65,14 +62,7 @@ function CabinRow({ cabin }) {
 		maxCapacity,
 		id: cabinId,
 	} = cabin;
-	const { isLoading: isDeleting, mutate: removeCabin } = useMutation({
-		mutationFn: deleteCabin,
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["cabins"] });
-			toast.success("Cabin successfully deleted");
-		},
-		onError: () => toast.error("Cabin could not be deleted"),
-	});
+	const { isDeleting, removeCabin } = useDeleteCabin();
 	return (
 		<>
 			<TableRow>
@@ -82,7 +72,7 @@ function CabinRow({ cabin }) {
 				<Cabin>{name}</Cabin>
 				<Capacity>{maxCapacity}</Capacity>
 				<Price>{regularPrice}</Price>
-				<Discount>{discount}</Discount>
+				<Discount>{discount ? discount : "-"}</Discount>
 				<td>
 					<Button
 						variation="secondary"

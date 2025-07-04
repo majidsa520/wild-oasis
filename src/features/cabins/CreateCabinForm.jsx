@@ -39,7 +39,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 				},
 				{
 					onSuccess: (data) => {
-						resetForm();
+						//resetForm({});
 					},
 				}
 			);
@@ -59,6 +59,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 		//form errors here...
 	}
 	const isPending = isCreating || isEditing;
+	console.log(isPending);
 	return (
 		<Form onSubmit={handleSubmit(onSubmit, onError)}>
 			<FormRow label="Cabin Name" error={errors?.name?.message}>
@@ -99,7 +100,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 						required: "This field is required",
 						min: { value: 0, message: "discount cannot be negative!" },
 						validate: (value) =>
-							value <= getValues().regularPrice ||
+							Number(value) <= Number(getValues("regularPrice")) ||
 							"discount cannot be more than product price",
 					})}
 					disabled={isPending}

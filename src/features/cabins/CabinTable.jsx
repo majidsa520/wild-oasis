@@ -4,6 +4,7 @@ import { getCabins } from "../../services/apiCabins";
 import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
 import { useCabins } from "./useCabins";
+import { useCreateCabin } from "./useCreateCabin";
 const Table = styled.table`
 	border: 1px solid var(--color-grey-200);
 
@@ -30,7 +31,9 @@ const TableHeader = styled.tr`
 
 function CabinTable() {
 	const { cabins, isLoading, error } = useCabins();
+
 	if (isLoading) return <Spinner />;
+
 	return (
 		<Table role="table">
 			<thead>

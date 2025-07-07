@@ -1,19 +1,16 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable react/prop-types */
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
-import { createCabin } from "../../services/apiCabins";
 import FormRow from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
 import { useEditCabin } from "./useEditCabin";
 
-function CreateCabinForm({ cabinToEdit = {} }) {
+function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
 	const { id: editId, ...editValues } = cabinToEdit;
 	const isEditingSession = Boolean(editId);
 	const { createNewCabin, isCreating } = useCreateCabin();
@@ -48,8 +45,8 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 				{ ...data, image: image },
 				{
 					onSuccess: (data) => {
-						console.log(data);
 						resetForm();
+						onCloseModal?.();
 					},
 				}
 			);
@@ -61,7 +58,10 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 	const isPending = isCreating || isEditing;
 	console.log(isPending);
 	return (
-		<Form onSubmit={handleSubmit(onSubmit, onError)}>
+		<Form
+			onSubmit={handleSubmit(onSubmit, onError)}
+			type={onCloseModal ? "modal" : "regular"}
+		>
 			<FormRow label="Cabin Name" error={errors?.name?.message}>
 				<Input
 					id="name"
@@ -117,7 +117,9 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 				<FileInput
 					id="image"
 					{...register("image", {
-						required: isEditingSession ? false : "You must upload an image.",
+						required: isEditingSession
+							? false
+							: "You must upload an image.",
 					})}
 					disabled={isPending}
 					accept="image/*"
@@ -126,7 +128,11 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 			<FormRow>
 				{/* type is an HTML attribute! */}
 				<>
-					<Button variation="secondary" type="reset">
+					<Button
+						variation="secondary"
+						type="reset"
+						onClick={() => onCloseModal?.()}
+					>
 						Cancel
 					</Button>
 					<Button disabled={isPending}>

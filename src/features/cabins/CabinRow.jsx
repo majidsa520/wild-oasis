@@ -8,18 +8,7 @@ import { HiSquare2Stack } from "react-icons/hi2";
 import { useCreateCabin } from "./useCreateCabin";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-
-const TableRow = styled.tr`
-	display: grid;
-	grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-	column-gap: 2.4rem;
-	align-items: center;
-	padding: 1.4rem 2.4rem;
-
-	&:not(:last-child) {
-		border-bottom: 1px solid var(--color-grey-100);
-	}
-`;
+import Table from "../../ui/Table";
 
 const Img = styled.img`
 	display: block;
@@ -30,7 +19,7 @@ const Img = styled.img`
 	transform: scale(1.5) translateX(-7px);
 `;
 
-const Cabin = styled.td`
+const Cabin = styled.div`
 	font-size: 1.6rem;
 	font-weight: 600;
 	color: var(--color-grey-600);
@@ -38,18 +27,18 @@ const Cabin = styled.td`
 	text-align: center;
 `;
 
-const Price = styled.td`
+const Price = styled.div`
 	font-family: "Sono";
 	font-weight: 600;
 	text-align: center;
 `;
-const Capacity = styled.td`
+const Capacity = styled.div`
 	font-family: "Sono";
 	font-weight: 600;
 	text-align: center;
 `;
 
-const Discount = styled.td`
+const Discount = styled.div`
 	font-family: "Sono";
 	font-weight: 500;
 	color: var(--color-green-700);
@@ -80,15 +69,15 @@ function CabinRow({ cabin }) {
 	}
 	const { isDeleting, removeCabin } = useDeleteCabin();
 	return (
-		<TableRow>
-			<td>
+		<Table.Row>
+			<div>
 				<Img src={image} />
-			</td>
+			</div>
 			<Cabin>{name}</Cabin>
 			<Capacity>{maxCapacity}</Capacity>
 			<Price>{regularPrice}</Price>
 			<Discount>{discount ? discount : "-"}</Discount>
-			<td>
+			<div>
 				<Modal>
 					<Modal.Open opens="update-cabin">
 						<Button variation="secondary" size="small">
@@ -125,8 +114,8 @@ function CabinRow({ cabin }) {
 						/>
 					</Modal.Window>
 				</Modal>
-			</td>
-		</TableRow>
+			</div>
+		</Table.Row>
 	);
 }
 

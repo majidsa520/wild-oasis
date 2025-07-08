@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { getCabins } from "../../services/apiCabins";
 import Spinner from "../../ui/Spinner";
+import Error from "../../ui/Error";
 import CabinRow from "./CabinRow";
 import { useCabins } from "./useCabins";
 import { useCreateCabin } from "./useCreateCabin";
@@ -47,9 +48,11 @@ function CabinTable() {
 				</TableHeader>
 			</thead>
 			<tbody>
-				{cabins?.map((cabin) => (
-					<CabinRow cabin={cabin} key={cabin.id} />
-				))}
+				{cabins ? (
+					cabins?.map((cabin) => <CabinRow cabin={cabin} key={cabin.id} />)
+				) : (
+					<Error>Loading problem</Error>
+				)}
 			</tbody>
 		</Table>
 	);

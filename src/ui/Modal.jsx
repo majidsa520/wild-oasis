@@ -86,14 +86,12 @@ function Window({ children, name }) {
 
 	return createPortal(
 		<Overlay>
-			<div>
-				<StyledModal ref={styledModalRef}>
-					<Button onClick={close}>
-						<HiXMark />
-					</Button>
-					{children}
-				</StyledModal>
-			</div>
+			<StyledModal ref={styledModalRef}>
+				<Button onClick={close}>
+					<HiXMark />
+				</Button>
+				<dive>{cloneElement(children, { onCloseModal: close })}</dive>
+			</StyledModal>
 		</Overlay>,
 		document.body
 	);

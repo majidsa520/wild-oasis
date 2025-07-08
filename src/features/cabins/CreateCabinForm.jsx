@@ -56,7 +56,6 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
 		//form errors here...
 	}
 	const isPending = isCreating || isEditing;
-	console.log(isPending);
 	return (
 		<Form
 			onSubmit={handleSubmit(onSubmit, onError)}

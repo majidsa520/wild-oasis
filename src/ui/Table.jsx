@@ -74,11 +74,16 @@ function Header({ children }) {
 	const { columns } = useContext(TableContext);
 	return <StyledHeader columns={columns}>{children}</StyledHeader>;
 }
+function Body({ data, render }) {
+	if (!data.length) return <Empty>No cabins found</Empty>;
+	return <StyledBody>{data.map(render)}</StyledBody>;
+}
 function Row({ children }) {
 	const { columns } = useContext(TableContext);
 	return <StyledRow columns={columns}>{children}</StyledRow>;
 }
 Table.Header = Header;
+Table.Body = Body;
 Table.Row = Row;
 Table.Footer = Footer;
 

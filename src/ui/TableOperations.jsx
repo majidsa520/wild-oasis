@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Filter from "./Filter";
+import SortBy from "./SortBy";
 
 const TableOperationsDiv = styled.div`
 	display: flex;
@@ -19,6 +20,7 @@ export default function TableOperations() {
 					<Filter.Button filter="no-discount">no discount</Filter.Button>
 				</Filter.Panel>
 			</Filter>
+			<SortBy />
 		</TableOperationsDiv>
 	);
 }

@@ -23,6 +23,13 @@ function CabinTable() {
 		default:
 			filteredCabins = cabins;
 	}
+	const sortBy = searchParams.get("sortBy") || "name-asc";
+	const [sortField, sortDirection] = sortBy.split("-");
+	console.log(filteredCabins);
+	const sortModifier = sortDirection === "asc" ? 1 : -1;
+	const sortedCabins = filteredCabins?.sort(
+		(a, b) => (a[sortField] - b[sortField]) * sortModifier
+	);
 	if (isLoading) return <Spinner />;
 
 	return (
@@ -37,7 +44,7 @@ function CabinTable() {
 					<div></div>
 				</Table.Header>
 				<Table.Body
-					data={filteredCabins}
+					data={sortedCabins}
 					render={(cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
 				/>
 			</Table>

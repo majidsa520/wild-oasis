@@ -28,7 +28,7 @@ const StyledHeader = styled(CommonRow)`
 	font-weight: 600;
 	color: var(--color-grey-600);
 	& > * {
-		text-align: center;
+		text-align: left;
 	}
 `;
 

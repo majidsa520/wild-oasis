@@ -2,6 +2,7 @@ import BookingRow from "./BookingRow";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
+import Spinner from "../../ui/Spinner";
 import { useBookings } from "./useBookings";
 
 function BookingTable() {
@@ -10,6 +11,7 @@ function BookingTable() {
 		error: loadingBookingsError,
 		isLoading: isLoadingBookings,
 	} = useBookings();
+	if (isLoadingBookings) return <Spinner />;
 	if (!bookings.length) return <Empty resourceName="bookings" />;
 	return (
 		<Menus>

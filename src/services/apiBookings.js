@@ -1,11 +1,15 @@
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 
-export async function getBookings() {
-	const { data, error } = await supabase
+export async function getBookings({ filter, sort }) {
+	let query = supabase
 		.from("bookings")
 		.select("*, cabins(name), guests(fullName,email)");
-
+	query =
+		filter.filterBy === "all" || !filter.filterBy
+			? query
+			: query.eq(filter.field, filter.filterBy);
+	const { data, error } = await query;
 	if (error) {
 		console.log(error);
 		throw new Error("something went wrong" + error);

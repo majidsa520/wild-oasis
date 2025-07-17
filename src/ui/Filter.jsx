@@ -36,36 +36,26 @@ const FilterButton = styled.button`
 		color: var(--color-brand-50);
 	}
 `;
-const FilterContext = createContext();
-function Filter({ children }) {
+export default function Filter({ filterOptions, filterField }) {
 	const [searchParams, setSearchParams] = useSearchParams();
-	const filterBy = searchParams.get("filterBy");
-	const setFilterBy = (value) => {
-		searchParams.set("filterBy", value);
+	const currentFilter = searchParams.get(filterField) || "all";
+	const setFilter = (value) => {
+		searchParams.set(filterField, value);
 		setSearchParams(searchParams);
 	};
 	return (
-		<FilterContext.Provider value={{ filterBy, setFilterBy }}>
-			{children}
-		</FilterContext.Provider>
+		<StyledFilter>
+			{filterOptions.map((filterOption) => (
+				<FilterButton
+					key={filterOption.value}
+					value={filterOption.value}
+					onClick={() => setFilter(filterOption.value)}
+					active={currentFilter === filterOption.value}
+					disabled={currentFilter === filterOption.value}
+				>
+					{filterOption.label}
+				</FilterButton>
+			))}
+		</StyledFilter>
 	);
 }
-function Panel({ children }) {
-	return <StyledFilter>{children}</StyledFilter>;
-}
-function Button({ children, filter, ...props }) {
-	const { filterBy, setFilterBy } = useContext(FilterContext);
-	return (
-		<FilterButton
-			onClick={() => setFilterBy(filter)}
-			{...props}
-			active={filterBy === filter}
-			disabled={filterBy === filter}
-		>
-			{children}
-		</FilterButton>
-	);
-}
-Filter.Panel = Panel;
-Filter.Button = Button;
-export default Filter;

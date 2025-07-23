@@ -8,6 +8,7 @@ export default function SortBy({ sortOptions }) {
 	//const [sortField, sortDirection] = sortBy.split("-");
 	function handleChange(e) {
 		searchParams.set("sortBy", e.target.value);
+		searchParams.set("page", 1);
 		setSearchParams(searchParams);
 	}
 	return (

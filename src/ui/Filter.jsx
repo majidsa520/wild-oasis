@@ -41,6 +41,7 @@ export default function Filter({ filterOptions, filterField }) {
 	const currentFilter = searchParams.get(filterField) || "all";
 	const setFilter = (value) => {
 		searchParams.set(filterField, value);
+		searchParams.set("page", 1);
 		setSearchParams(searchParams);
 	};
 	return (

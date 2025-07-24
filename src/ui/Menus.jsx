@@ -53,6 +53,10 @@ const StyledItem = styled.li`
 	gap: 1.6rem;
 	cursor: pointer;
 
+	& > span {
+		white-space: nowrap;
+	}
+
 	&:hover {
 		background-color: var(--color-grey-50);
 	}
@@ -83,10 +87,8 @@ function Toggle({ children, id }) {
 	const { open, close, openId, setPosition } = useContext(MenusContext);
 	function handleClick(e) {
 		const listTag = e.target.closest("list");
-		console.log(listTag);
 		if (id === "" || id !== openId) {
 			open(id);
-			console.log({ x: e.clientX, y: e.clientY });
 			setPosition({ x: e.clientX, y: e.clientY });
 		} else close();
 	}

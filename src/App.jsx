@@ -36,9 +36,9 @@ function App() {
 						<Route path="/checkin/:bookingId" element={<Checkin />} />
 						<Route path="/cabins" element={<Cabins />} />
 						<Route path="/dashboard" element={<Dashboard />} />
-						<Route path="/login" element={<Login />} />
 						<Route path="/settings" element={<Settings />} />
 					</Route>
+					<Route path="/login" element={<Login />} />
 					<Route path="/users" element={<Users />} />
 					<Route path="*" element={<PageNotFound />} />
 				</Routes>

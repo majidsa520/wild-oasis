@@ -11,8 +11,12 @@ export function useCheckin() {
 		error,
 		isLoading: isCheckingin,
 	} = useMutation({
-		mutationFn: (bookingId) =>
-			updateBooking(bookingId, { status: "checked-in" }), // this way we can pass the bookingId in mutation function(checkin(id))
+		mutationFn: ({ bookingId, breakfast }) =>
+			updateBooking(bookingId, {
+				status: "checked-in",
+				isPaid: true,
+				...breakfast,
+			}), // this way we can pass the bookingId in mutation function(checkin(id))
 		onSuccess: (data) => {
 			//the data argument here is the returned value from updateBooking function
 			toast.success(`The booking #${data.id} has successfully checked in`);

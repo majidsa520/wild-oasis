@@ -8,9 +8,8 @@ import Menus from "../../ui/Menus";
 
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
-import { IconBase } from "react-icons";
 import { useNavigate } from "react-router-dom";
-import { HiEye } from "react-icons/hi2";
+import { HiArrowDownOnSquare, HiEye } from "react-icons/hi2";
 import { HiDotsHorizontal } from "react-icons/hi";
 
 const Cabin = styled.div`
@@ -97,6 +96,15 @@ function BookingRow({
 					>
 						See details
 					</Menus.Item>
+
+					{status === "unconfirmed" && (
+						<Menus.Item
+							icon={<HiArrowDownOnSquare />}
+							onClick={() => navigate(`/checkin/${bookingId}`)}
+						>
+							Check in
+						</Menus.Item>
+					)}
 				</Menus.List>
 			</Menus.Menu>
 		</Table.Row>

@@ -13,6 +13,9 @@ import ButtonText from "../../ui/ButtonText";
 import { useMoveBack } from "../../hooks/useMoveBack";
 import { useBooking } from "./useBooking";
 import { useNavigate } from "react-router-dom";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
+import { useDeleteBooking } from "./useDeleteBooking";
 
 const HeadingGroup = styled.div`
 	display: flex;
@@ -25,6 +28,8 @@ function BookingDetail() {
 	const navigate = useNavigate();
 
 	const moveBack = useMoveBack();
+
+	const { discardBooking, isDeletingBooking } = useDeleteBooking();
 
 	const statusToTagName = {
 		unconfirmed: "blue",
@@ -49,6 +54,22 @@ function BookingDetail() {
 			<BookingDataBox booking={booking} />
 
 			<ButtonGroup>
+				<Modal>
+					<Modal.Open opens="delete-cabin">
+						<Button variation="danger">delete</Button>
+					</Modal.Open>
+					<Modal.Window name="delete-cabin">
+						<ConfirmDelete
+							onConfirm={() =>
+								discardBooking(bookingId, {
+									onSettled: () => navigate("/bookings"), // happens (onSuccess or onError)
+								})
+							}
+							resourceName={`booking #${bookingId}`}
+							disabled={isDeletingBooking}
+						/>
+					</Modal.Window>
+				</Modal>
 				{status === "unconfirmed" && (
 					<Button onClick={() => navigate(`/checkin/${bookingId}`)}>
 						Check in

@@ -44,9 +44,9 @@ function App() {
 						<Route path="/cabins" element={<Cabins />} />
 						<Route path="/dashboard" element={<Dashboard />} />
 						<Route path="/settings" element={<Settings />} />
+						<Route path="/users" element={<Users />} />
 					</Route>
 					<Route path="/login" element={<Login />} />
-					<Route path="/users" element={<Users />} />
 					<Route path="*" element={<PageNotFound />} />
 				</Routes>
 			</BrowserRouter>

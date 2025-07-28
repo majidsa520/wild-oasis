@@ -38,10 +38,10 @@ const FilterButton = styled.button`
 `;
 export default function Filter({ filterOptions, filterField }) {
 	const [searchParams, setSearchParams] = useSearchParams();
-	const currentFilter = searchParams.get(filterField) || "all";
+	const currentFilter =
+		searchParams.get(filterField) || filterOptions.at(0).value;
 	const setFilter = (value) => {
 		searchParams.set(filterField, value);
-		searchParams.set("page", 1);
 		setSearchParams(searchParams);
 	};
 	return (

@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { useCabins } from "../cabins/useCabins";
+import SalesChart from "./SalesChart";
+import Stats from "./Stats";
 import { useRecentBookings } from "./useRecentBookings";
 import { useRecentStays } from "./useRecentStays";
-import Stats from "./Stats";
-import { useCabins } from "../cabins/useCabins";
 
 const StyledDashboardLayout = styled.div`
 	display: grid;
@@ -29,6 +30,7 @@ export default function DashboardLayout() {
 				numDays={numDays}
 				numCabins={numCabins}
 			/>
+			<SalesChart bookings={bookings} numDays={numDays} />
 		</StyledDashboardLayout>
 	);
 }

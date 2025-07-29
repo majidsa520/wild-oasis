@@ -37,13 +37,13 @@ export default function Stats({
 			<Stat
 				icon={<HiOutlineCalendarDays />}
 				color="indigo"
-				title="Bookings"
+				title="Checkins"
 				value={checkins}
 			/>
 			<Stat
 				icon={<HiOutlineChartBar />}
 				color="yellow"
-				title="Bookings"
+				title="Occupancy Rate"
 				value={occupationRate ? `${occupationRate} %` : null}
 			/>
 		</>

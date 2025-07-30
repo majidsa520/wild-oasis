@@ -54,7 +54,7 @@ export default function Filter({ filterOptions, filterField }) {
 					key={filterOption.value}
 					value={filterOption.value}
 					onClick={() => setFilter(filterOption.value)}
-					active={currentFilter === filterOption.value}
+					active={String(currentFilter === filterOption.value)}
 					disabled={currentFilter === filterOption.value}
 				>
 					{filterOption.label}

@@ -40,7 +40,7 @@ function LoginForm() {
 				/>
 			</FormRowVertical>
 			<FormRowVertical>
-				<Button size="large" disabled={isLoggingin}>
+				<Button $size="large" disabled={isLoggingin}>
 					{!isLoggingin ? "Login" : <SpinnerMini />}
 				</Button>
 			</FormRowVertical>

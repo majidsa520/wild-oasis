@@ -154,7 +154,7 @@ export default function DurationChart({ confirmedStays }) {
 	const chartData = prepareData(startData, confirmedStays);
 	return (
 		<ChartBox>
-			<Heading as="h3">chart</Heading>
+			<Heading as="h3">Stay Duration Summary</Heading>
 			<ResponsiveContainer height={240} width="100%">
 				<PieChart>
 					<Tooltip />

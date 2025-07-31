@@ -20,8 +20,11 @@ export function useCheckin() {
 		onSuccess: (data) => {
 			//the data argument here is the returned value from updateBooking function
 			toast.success(`The booking #${data.id} has successfully checked in`);
+			queryClient.invalidateQueries(["stays"]);
+			queryClient.invalidateQueries(["todayActivity"]);
+			queryClient.invalidateQueries(["stays"]);
 			queryClient.invalidateQueries(["bookings"]);
-			navigate("/bookings?status=checked-in");
+			navigate(-1);
 		},
 	});
 	return { checkin, error, isCheckingin };

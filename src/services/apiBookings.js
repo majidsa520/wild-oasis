@@ -103,8 +103,8 @@ export async function updateBooking(id, fields) {
 		.select()
 		.single();
 	if (error) {
-		console.log(error);
-		throw new Error("something went wrong");
+		console.log(error.message);
+		throw new Error(`something went wrong: ${error.message}`);
 	}
 	return data;
 }

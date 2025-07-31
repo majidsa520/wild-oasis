@@ -81,7 +81,7 @@ function SignupForm() {
 
 			<FormRow>
 				{/* type is an HTML attribute! */}
-				<Button variation="secondary" type="reset" disabled={isSigningup}>
+				<Button $variation="secondary" type="reset" disabled={isSigningup}>
 					Cancel
 				</Button>
 				<Button disabled={isSigningup}>Create new user</Button>

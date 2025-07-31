@@ -18,7 +18,7 @@ const FilterButton = styled.button`
 	border: none;
 
 	${(props) =>
-		props.active &&
+		props.$active &&
 		css`
 			background-color: var(--color-brand-600);
 			color: var(--color-brand-50);
@@ -54,7 +54,8 @@ export default function Filter({ filterOptions, filterField }) {
 					key={filterOption.value}
 					value={filterOption.value}
 					onClick={() => setFilter(filterOption.value)}
-					active={String(currentFilter === filterOption.value)}
+					$active={currentFilter === filterOption.value}
+					// for preventing passing the prop as html attribute: add $ sign in the fron of prop
 					disabled={currentFilter === filterOption.value}
 				>
 					{filterOption.label}

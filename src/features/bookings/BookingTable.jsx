@@ -8,7 +8,7 @@ import { useBookings } from "./useBookings";
 
 function BookingTable() {
 	const {
-		bookings = [],
+		bookings,
 		error: loadingBookingsError,
 		isLoading: isLoadingBookings,
 		count,

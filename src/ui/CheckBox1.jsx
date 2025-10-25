@@ -26,7 +26,13 @@ const StyledCheckbox = styled.div`
 	}
 `;
 
-function CheckBox({ checked, onChange, disabled = false, id, children }) {
+export default function CheckBox({
+	checked,
+	onChange,
+	disabled = false,
+	id,
+	children,
+}) {
 	return (
 		<StyledCheckbox>
 			<label htmlFor={!disabled ? id : ""}>
@@ -42,4 +48,3 @@ function CheckBox({ checked, onChange, disabled = false, id, children }) {
 		</StyledCheckbox>
 	);
 }
-export default CheckBox;

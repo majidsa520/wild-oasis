@@ -42,5 +42,4 @@ function CheckBox({ checked, onChange, disabled = false, id, children }) {
 		</StyledCheckbox>
 	);
 }
-
 export default CheckBox;
